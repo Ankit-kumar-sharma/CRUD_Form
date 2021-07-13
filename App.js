@@ -8,10 +8,10 @@ export default function App() {
   const [dob, setDob] = useState("");
   const [gender, setGender] = useState("");
   const [city, setCity] = useState("");
-  const [status, setStatus] = useState(true);
+  const [status, setStatus] = useState(false);
   const [id, setId] = useState(1);
-  var [i,setI]=useState(0);
-  var [n,setN]=useState(0);
+  var [i, setI] = useState(0);
+  var [n, setN] = useState(0);
   let [informa, setInforma] = useState([]);
   var localStorageContent = localStorage.getItem("informa");
   if (localStorageContent === null) {
@@ -19,7 +19,6 @@ export default function App() {
   } else {
     informa = JSON.parse(localStorageContent);
   }
-  //const titles=Object.keys(informa[0]);
 
   function handleSubmit(e) {
     var localStorageContent = localStorage.getItem("informa");
@@ -30,21 +29,8 @@ export default function App() {
       informa = JSON.parse(localStorageContent);
     }
     setId(id + 1);
-    if(i==0)
-    {
-    informa.push({
-      Id: id,
-      Name: name,
-      Email: email,
-      Number: number,
-      DOB: dob,
-      Gender: gender,
-      City: city,
-    });
-    }
-    else
-    {
-      informa[n]={   
+    if (i == 0) {
+      informa.push({
         Id: id,
         Name: name,
         Email: email,
@@ -52,7 +38,17 @@ export default function App() {
         DOB: dob,
         Gender: gender,
         City: city,
-      }
+      });
+    } else {
+      informa[n] = {
+        Id: id,
+        Name: name,
+        Email: email,
+        Number: number,
+        DOB: dob,
+        Gender: gender,
+        City: city,
+      };
     }
     localStorage.setItem("informa", JSON.stringify(informa));
     setStatus(true);
@@ -62,38 +58,21 @@ export default function App() {
     setDob("");
     setGender("");
     setCity("");
-    /*   setInterval(() => {
-      window.location.reload();
-    }, 5000); */
-    /* e.preventDefault(); 
-    var infomation=[];
-    infomation.push({name,email,number,dob,gender,city})
-    localStorage.infomation+=JSON.stringify({"Name":name,"Email":email,"Mobile_Number":number,"DOB":dob,"Gender":gender,"City":city})
-   // const Userdata=[name,email,number,dob,gender,city,status];
-    //localStorage.setItem(email,Userdata);  
-    setStatus(true);
-    setInterval(()=>{window.location.reload()},10000); */
   }
   function removeItem(index) {
-    /* console.log(informa);
-   console.log(index); */
     informa.splice(index, 1);
-    //console.log(informa);
+
     setInforma(informa);
     localStorage.setItem("informa", JSON.stringify(informa));
-    //window.location.reload();
   }
-  function editItem(name,email,gender,index,id) {
-    
+  function editItem(name, email, gender, index, id) {
     setName(name);
     setEmail(email);
     setGender(gender);
     setN(index);
-    setI(i+1);
+    setI(i + 1);
     console.log(name);
     console.log(informa);
-    //setInforma(informa);
-    //localStorage.setItem("informa", JSON.stringify(informa)); 
   }
 
   return (
